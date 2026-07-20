@@ -7,6 +7,10 @@ type AuthContextValue = {
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, firstName?: string) => Promise<void>;
+  verifyEmail: (email: string, code: string) => Promise<void>;
+  resendVerification: (email: string) => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
+  resetPassword: (email: string, code: string, newPassword: string) => Promise<void>;
   logout: () => void;
 };
 
@@ -36,8 +40,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(await api.me());
     },
     register: async (email, password, firstName) => {
-      // Create the account only — user signs in afterward on the login form.
       await api.register(email, password, firstName);
+    },
+    verifyEmail: async (email, code) => {
+      await api.verifyEmail(email, code);
+    },
+    resendVerification: async (email) => {
+      await api.resendVerification(email);
+    },
+    forgotPassword: async (email) => {
+      await api.forgotPassword(email);
+    },
+    resetPassword: async (email, code, newPassword) => {
+      await api.resetPassword(email, code, newPassword);
     },
     logout: () => {
       setTokens(null);

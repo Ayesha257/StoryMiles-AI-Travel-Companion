@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, ForeignKey, String, Text
+from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -17,6 +17,11 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    verification_code_hash: Mapped[str | None] = mapped_column(String(64))
+    verification_code_purpose: Mapped[str | None] = mapped_column(String(32))
+    verification_code_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    verification_code_sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    verification_attempts: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
 
     profile: Mapped[UserProfile | None] = relationship(back_populates="user", cascade="all, delete-orphan", uselist=False)
     preferences: Mapped[UserPreferences | None] = relationship(back_populates="user", cascade="all, delete-orphan", uselist=False)

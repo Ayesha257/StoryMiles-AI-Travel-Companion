@@ -25,6 +25,21 @@ class AuthenticationError(AppError):
     detail = "Authentication failed"
 
 
+class VerificationError(AppError):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Email verification failed"
+
+
+class RateLimitError(AppError):
+    status_code = status.HTTP_429_TOO_MANY_REQUESTS
+    detail = "Please wait before trying again"
+
+
+class EmailDeliveryError(AppError):
+    status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+    detail = "Verification email could not be sent"
+
+
 class AIServiceError(AppError):
     status_code = status.HTTP_502_BAD_GATEWAY
     detail = "AI provider request failed"

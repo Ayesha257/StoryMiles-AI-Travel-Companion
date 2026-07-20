@@ -114,17 +114,6 @@ function HeroCollage() {
           </div>
         </div>
       </div>
-      {/* floating match card */}
-      <div className="absolute -left-6 bottom-8 ticket-card !py-3 !px-4 flex items-center gap-3 stamp-in">
-        <div className="score-badge !w-11 !h-11">
-          <span className="font-display text-sm">96</span>
-          <span className="text-[7px] tracking-widest opacity-70">MATCH</span>
-        </div>
-        <div>
-          <div className="text-sm font-semibold text-ink">Perfect match found</div>
-          <div className="text-xs text-charcoal/60">Based on your travel style</div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -45,6 +45,16 @@ class Settings(BaseSettings):
     gemini_api_key: str | None = None
     gemini_model: str = "gemini-3.5-flash"
 
+    # SMTP delivery for registration verification codes.
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = Field(default=587, ge=1, le=65535)
+    smtp_username: str | None = None
+    smtp_password: str | None = None
+    smtp_from_email: str | None = None
+    smtp_from_name: str = "StoryMiles"
+    verification_code_expire_minutes: int = Field(default=10, ge=2, le=60)
+    verification_resend_cooldown_seconds: int = Field(default=60, ge=15, le=600)
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_cors_origins(cls, value: object) -> object:

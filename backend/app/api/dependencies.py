@@ -12,6 +12,7 @@ from app.repositories.recommendation import RecommendationRepository
 from app.repositories.user import UserRepository
 from app.services.ai_client import AIClient
 from app.services.destination import DestinationService
+from app.services.email_verification import EmailVerificationService
 from app.services.gemini_client import GeminiClient
 from app.services.history import HistoryService
 from app.services.image import ImageUploadService
@@ -23,6 +24,12 @@ from app.services.user import UserService
 
 def get_user_service(session: Annotated[AsyncSession, Depends(get_db)]) -> UserService:
     return UserService(UserRepository(session), PreferencesRepository(session))
+
+
+def get_email_verification_service(
+    session: Annotated[AsyncSession, Depends(get_db)],
+) -> EmailVerificationService:
+    return EmailVerificationService(UserRepository(session))
 
 
 def get_destination_service(session: Annotated[AsyncSession, Depends(get_db)]) -> DestinationService:

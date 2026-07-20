@@ -27,7 +27,29 @@ class TokenResponse(Schema):
 
 
 class RegisterResponse(Schema):
-    user: UserResponse
-    access_token: str
-    refresh_token: str
-    token_type: str = "bearer"
+    email: EmailStr
+    message: str
+    verification_required: bool = True
+
+
+class VerifyEmailRequest(Schema):
+    email: EmailStr
+    code: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$")
+
+
+class ResendVerificationRequest(Schema):
+    email: EmailStr
+
+
+class ForgotPasswordRequest(Schema):
+    email: EmailStr
+
+
+class ResetPasswordRequest(Schema):
+    email: EmailStr
+    code: str = Field(min_length=6, max_length=6, pattern=r"^\d{6}$")
+    new_password: str = Field(min_length=8, max_length=128)
+
+
+class MessageResponse(Schema):
+    message: str

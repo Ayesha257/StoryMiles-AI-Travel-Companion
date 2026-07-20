@@ -2,6 +2,7 @@ from uuid import UUID
 
 from app.auth.security import hash_password
 from app.core.exceptions import ConflictError
+from app.models.user import User
 from app.repositories.preferences import PreferencesRepository
 from app.repositories.user import UserRepository
 from app.schemas.auth import RegisterRequest
@@ -14,13 +15,20 @@ class UserService:
         self.users = users
         self.preferences = preferences
 
-    async def register(self, request: RegisterRequest) -> object:
+    async def register(self, request: RegisterRequest) -> User:
         if await self.users.get_by_email(str(request.email)):
             raise ConflictError("An account with this email already exists")
-        user = await self.users.create(email=str(request.email).lower(), password_hash=hash_password(request.password))
+        user = await self.users.create(
+            email=str(request.email).lower(),
+            password_hash=hash_password(request.password),
+            is_verified=False,
+        )
         await self.users.create_profile(user.id, first_name=request.first_name, last_name=request.last_name)
         await self.preferences.create(user_id=user.id)
-        return await self.users.get_with_relations(user.id)
+        created = await self.users.get_with_relations(user.id)
+        if created is None:
+            raise RuntimeError("Registered user could not be loaded")
+        return created
 
     async def update_profile(self, user_id: UUID, request: ProfileUpdate) -> object:
         user = await self.users.get_with_relations(user_id)

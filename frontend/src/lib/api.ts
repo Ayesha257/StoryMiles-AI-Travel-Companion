@@ -204,9 +204,29 @@ export const api = {
       body: JSON.stringify({ email, password }),
     }),
   register: (email: string, password: string, firstName?: string) =>
-    apiRequest<{ user: User } & Tokens>("/auth/register", {
+    apiRequest<{ email: string; message: string; verification_required: boolean }>("/auth/register", {
       method: "POST",
       body: JSON.stringify({ email, password, first_name: firstName || null }),
+    }),
+  verifyEmail: (email: string, code: string) =>
+    apiRequest<{ message: string }>("/auth/verify-email", {
+      method: "POST",
+      body: JSON.stringify({ email, code }),
+    }),
+  resendVerification: (email: string) =>
+    apiRequest<{ message: string }>("/auth/resend-verification", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    }),
+  forgotPassword: (email: string) =>
+    apiRequest<{ message: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    }),
+  resetPassword: (email: string, code: string, newPassword: string) =>
+    apiRequest<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ email, code, new_password: newPassword }),
     }),
   me: () => apiRequest<User>("/users/me"),
   recommendations: (request: RecommendationRequest) =>
