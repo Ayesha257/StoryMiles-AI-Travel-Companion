@@ -1,0 +1,9 @@
+.git
+.env
+.venv
+ml-artifacts/venv
+ml-artifacts/__pycache__
+__pycache__
+*.py[cod]
+uploads
+postgres_data

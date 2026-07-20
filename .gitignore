@@ -1,0 +1,53 @@
+# Secrets — never commit real keys
+.env
+**/.env
+!.env.example
+!**/.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.Python
+
+# Uploads & local runtime data
+uploads/
+backend/uploads/
+
+# Regeneratable ML training output (keep model + destinations.csv)
+backend/ml-artifacts/training_pairs.csv
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/.output/
+frontend/.wrangler/
+frontend/.tanstack/
+frontend/dist/
+frontend/.vite/
+frontend/bun.lock
+*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs / temp / one-off smoke tests
+*.log
+npm-debug.log*
+.cache/
+tmp/
+temp/
+backend/_gemini_*.py
+backend/_*.py
+

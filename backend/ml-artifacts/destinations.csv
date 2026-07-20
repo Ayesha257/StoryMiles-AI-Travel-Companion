@@ -1,0 +1,560 @@
+name,country,budget_tier,best_weather,tags,ideal_duration
+Milan,Italy,high,mild,"culture,cuisine,urban",6
+Yasawa Islands,Fiji,high,hot,"nature,beaches,seclusion",10
+Whistler,Canada,high,cold,"adventure,nature,wellness",4
+Guanajuato,Mexico,medium,mild,"culture,cuisine,urban",4
+Surabaya,Indonesia,low,hot,"culture,cuisine,urban",3
+Nuuk,Greenland,high,cold,"nature,seclusion,adventure",6
+Windhoek,Namibia,medium,mild,"adventure,nature,seclusion",4
+Kingston,Jamaica,medium,hot,"culture,nightlife,cuisine",6
+Nafplio,Greece,medium,mild,"culture,nature,cuisine",3
+Tbilisi,Georgia,low,mild,"culture,cuisine,adventure",4
+Heidelberg,Germany,medium,cold,"culture,nature,cuisine",3
+Hobart,Australia,medium,mild,"nature,culture,cuisine",4
+Nagasaki,Japan,medium,mild,"culture,cuisine,nature",3
+Utrecht,Netherlands,medium,cold,"culture,nightlife,cuisine",3
+Bagan,Myanmar,low,hot,"culture,nature,seclusion",6
+Malmö,Sweden,medium,cold,"culture,cuisine,urban",3
+Amsterdam,Netherlands,medium,cold,"culture,nightlife,urban",4
+New York,United States,high,mild,"culture,nightlife,cuisine",8
+Chicago,United States,high,cold,"culture,nightlife,cuisine",6
+Raleigh,United States,medium,mild,"culture,nature,cuisine",3
+Trondheim,Norway,high,cold,"culture,nature,seclusion",4
+Bruges,Belgium,medium,cold,"culture,cuisine,seclusion",3
+Reykjavik,Iceland,high,cold,"nature,adventure,wellness",4
+Seoul,South Korea,medium,mild,"culture,nightlife,cuisine",6
+Ankara,Turkey,medium,mild,"culture,cuisine,urban",6
+Kyoto,Japan,high,mild,"culture,cuisine,nature",6
+Tampa,United States,medium,mild,"nature,beaches,nightlife",4
+Dublin,Ireland,medium,cold,"culture,nightlife,cuisine",4
+Washington,United States,medium,mild,"culture,urban,nightlife",4
+Livingstone,Zambia,medium,mild,"adventure,nature,seclusion",4
+Kraków,Poland,medium,cold,"culture,nightlife,cuisine",4
+Petra,Jordan,medium,mild,"culture,adventure,nature",6
+Athens,Greece,medium,mild,"culture,cuisine,nightlife",4
+Malé,Maldives,medium,hot,"nature,beaches,wellness",3
+Austin,United States,medium,mild,"nightlife,cuisine,culture",4
+Pago Pago,American Samoa,medium,hot,"nature,adventure,beaches",6
+Luanda,Angola,medium,hot,"cuisine,culture,adventure",6
+New Orleans,United States,medium,mild,"culture,nightlife,cuisine",4
+Raja Ampat,Indonesia,high,hot,"nature,beaches,seclusion",10
+Hamilton Island,Australia,high,mild,"nature,beaches,adventure",6
+Melbourne,Australia,medium,mild,"culture,cuisine,urban",4
+Puebla,Mexico,medium,mild,"culture,cuisine,urban",4
+Richmond,United States,medium,mild,"culture,cuisine,adventure",4
+Bridgetown,Barbados,medium,hot,"beaches,nature,nightlife",4
+Oaxaca City,Mexico,medium,mild,"culture,cuisine,adventure",4
+San Sebastián,Spain,medium,mild,"beaches,cuisine,culture",4
+Sedona,United States,medium,mild,"nature,wellness,adventure",3
+Cotonou,Benin,low,hot,"culture,cuisine,adventure",3
+Sarajevo,Bosnia and Herzegovina,low,cold,"culture,cuisine,adventure",4
+Tirana,Albania,low,mild,"culture,adventure,nature",3
+Rio de Janeiro,Brazil,medium,mild,"nature,beaches,nightlife",6
+Curitiba,Brazil,medium,mild,"culture,nature,cuisine",4
+Phnom Penh,Cambodia,low,hot,"culture,cuisine,adventure",4
+Fès,Morocco,low,mild,"culture,cuisine,wellness",6
+Toronto,Canada,medium,cold,"urban,culture,nightlife",4
+Lucca,Italy,medium,cold,"culture,cuisine,seclusion",3
+Edmonton,Canada,medium,cold,"culture,nature,adventure",4
+Barcelona,Spain,medium,mild,"culture,nightlife,cuisine",6
+Banff,Canada,high,cold,"adventure,nature,wellness",8
+Maputo,Mozambique,medium,mild,"nature,beaches,cuisine",4
+Dar es Salaam,Tanzania,low,hot,"culture,nature,beaches",4
+Hamilton,Bermuda,high,mild,"beaches,nature,cuisine",3
+Santiago de Chile,Chile,medium,mild,"culture,adventure,nature",4
+Shanghai,China,medium,mild,"culture,nightlife,cuisine",6
+Kathmandu,Nepal,low,mild,"culture,adventure,nature",8
+Auckland,New Zealand,medium,mild,"adventure,nature,nightlife",8
+Québec City,Canada,medium,cold,"culture,nature,cuisine",4
+Bogotá,Colombia,medium,mild,"culture,nightlife,cuisine",4
+Avarua,Cook Islands,medium,mild,"beaches,nature,wellness",6
+Izmir,Turkey,medium,mild,"culture,beaches,cuisine",4
+Skopje,North Macedonia,low,mild,"culture,adventure,nature",3
+Cartagena,Colombia,medium,hot,"culture,beaches,nightlife",4
+Dubrovnik,Croatia,medium,mild,"culture,nature,beaches",3
+Bergen,Norway,high,cold,"nature,culture,adventure",4
+Bocas del Toro,Panama,medium,hot,"nature,beaches,adventure",4
+Santo Domingo,Dominican Republic,medium,hot,"culture,beaches,nightlife",4
+Baños,Ecuador,low,mild,"adventure,nature,wellness",3
+Cairo,Egypt,low,mild,"culture,cuisine,urban",6
+Iquitos,Peru,low,hot,"adventure,nature,seclusion",6
+Charlotte,United States,medium,mild,"urban,culture,adventure",4
+Marseille,France,medium,mild,"culture,nightlife,cuisine",4
+Malabo,Equatorial Guinea,medium,hot,"nature,seclusion,culture",3
+Mbabane,Eswatini,low,mild,"nature,seclusion,culture",3
+Sofia,Bulgaria,low,cold,"culture,cuisine,adventure",4
+San Marino,San Marino,medium,mild,"culture,seclusion,nature",2
+Berlin,Germany,medium,cold,"culture,nightlife,urban",4
+Helsinki,Finland,medium,cold,"culture,nature,cuisine",4
+Warsaw,Poland,medium,cold,"culture,nightlife,cuisine",4
+Verona,Italy,medium,mild,"culture,cuisine,urban",3
+Annecy,France,medium,cold,"nature,culture,adventure",3
+Colombo,Sri Lanka,low,hot,"culture,cuisine,urban",4
+Fraser Island,Australia,medium,mild,"adventure,nature,beaches",4
+Dakar,Senegal,medium,hot,"culture,beaches,cuisine",6
+Wadi Rum,Jordan,medium,hot,"adventure,nature,seclusion",6
+Munich,Germany,medium,cold,"culture,urban,nightlife",3
+Freiburg,Germany,medium,cold,"nature,culture,seclusion",3
+Singapore,Singapore,high,hot,"cuisine,urban,culture",6
+Piran,Slovenia,medium,mild,"culture,nature,beaches",3
+Valletta,Malta,medium,mild,"culture,cuisine,nature",3
+Thessaloniki,Greece,medium,mild,"cuisine,culture,nightlife",4
+Georgetown,Guyana,low,hot,"nature,culture,adventure",3
+Jeju Island,South Korea,medium,mild,"nature,adventure,beaches",6
+Valencia,Spain,medium,mild,"cuisine,culture,nature",4
+Hoi An,Vietnam,low,hot,"culture,cuisine,seclusion",3
+Kolkata,India,low,hot,"culture,cuisine,urban",4
+Budapest,Hungary,medium,mild,"culture,nightlife,wellness",4
+Yogyakarta,Indonesia,low,hot,"culture,nature,cuisine",4
+Monaco,Monaco,high,mild,"nightlife,urban,culture",2
+Rome,Italy,medium,mild,"culture,cuisine,urban",6
+Stockholm,Sweden,high,cold,"urban,culture,nature",4
+Taipei,Taiwan,medium,mild,"cuisine,culture,nightlife",4
+Tokyo,Japan,high,mild,"culture,nightlife,cuisine",8
+Noumea,New Caledonia,high,mild,"nature,beaches,cuisine",6
+Palermo,Italy,medium,mild,"cuisine,culture,urban",4
+Sicily,Italy,medium,mild,"culture,cuisine,nature",8
+Amman,Jordan,medium,mild,"culture,cuisine,urban",4
+Nairobi,Kenya,medium,mild,"nature,culture,adventure",4
+Panama City,Panama,medium,hot,"culture,nature,nightlife",4
+Nagoya,Japan,high,mild,"culture,cuisine,urban",3
+Fukuoka,Japan,medium,mild,"cuisine,culture,nightlife",4
+Maseru,Lesotho,low,mild,"adventure,nature,culture",3
+Mexico City,Mexico,medium,mild,"culture,nightlife,cuisine",8
+Doha,Qatar,high,hot,"urban,culture,cuisine",4
+Astana,Kazakhstan,medium,cold,"urban,culture,nightlife",4
+Luang Prabang,Laos,low,hot,"culture,seclusion,nature",3
+Oaxaca,Mexico,medium,mild,"culture,cuisine,nature",4
+Kaunas,Lithuania,low,cold,"culture,nature,nightlife",3
+Podgorica,Montenegro,low,mild,"nature,culture,adventure",3
+Kuching,Malaysia,low,hot,"culture,nature,cuisine",3
+Port Louis,Mauritius,medium,mild,"beaches,culture,nature",6
+Beira,Mozambique,low,hot,"culture,adventure,nature",3
+Salalah,Oman,medium,hot,"nature,beaches,seclusion",6
+Pretoria,South Africa,medium,mild,"culture,nature,cuisine",3
+Monterrey,Mexico,medium,mild,"culture,nature,nightlife",3
+Chisinau,Moldova,low,cold,"culture,nature,nightlife",3
+Oslo,Norway,high,cold,"culture,nature,cuisine",4
+Paramaribo,Suriname,low,hot,"culture,nature,cuisine",3
+Kotor,Montenegro,medium,mild,"culture,nature,seclusion",3
+Rabat,Morocco,low,mild,"culture,cuisine,urban",4
+Arequipa,Peru,low,mild,"culture,nature,cuisine",4
+Krakow,Poland,medium,cold,"culture,nightlife,cuisine",4
+Chiang Rai,Thailand,low,hot,"culture,nature,cuisine",3
+Maastricht,Netherlands,medium,cold,"culture,cuisine,nature",3
+Christchurch,New Zealand,medium,cold,"adventure,nature,culture",6
+Gotland,Sweden,medium,cold,"culture,nature,beaches",4
+St Ives,United Kingdom,medium,cold,"beaches,culture,nature",3
+Tromsø,Norway,high,cold,"nature,adventure,seclusion",6
+Granada,Nicaragua,low,hot,"culture,nature,cuisine",3
+San Juan,Puerto Rico,medium,hot,"beaches,culture,nightlife",4
+Salt Lake City,United States,medium,mild,"nature,adventure,wellness",4
+Asunción,Paraguay,low,mild,"culture,nature,nightlife",3
+Manila,Philippines,low,hot,"culture,nightlife,cuisine",4
+Bern,Switzerland,high,cold,"culture,nature,cuisine",4
+Catania,Italy,medium,mild,"cuisine,culture,nature",4
+Davao,Philippines,low,hot,"nature,adventure,cuisine",4
+Porto,Portugal,medium,mild,"cuisine,culture,nightlife",4
+Azores,Portugal,medium,mild,"nature,seclusion,adventure",8
+Freetown,Sierra Leone,low,hot,"nature,beaches,culture",3
+Laval,Quebec,medium,cold,"culture,adventure,nature",3
+Saint-Denis,Réunion,medium,mild,"nature,culture,adventure",4
+Constanta,Romania,low,mild,"beaches,cuisine,culture",3
+Puerto Vallarta,Mexico,medium,mild,"beaches,adventure,nature",4
+Cape Town,South Africa,medium,mild,"nature,culture,adventure",8
+Castries,Saint Lucia,medium,hot,"nature,beaches,adventure",4
+São Tomé,São Tomé and Príncipe,medium,hot,"nature,adventure,beaches",8
+Madrid,Spain,medium,mild,"culture,nightlife,cuisine",4
+Nantes,France,medium,mild,"culture,cuisine,urban",4
+Victoria,Seychelles,high,hot,"nature,beaches,adventure",6
+Ljubljana,Slovenia,medium,mild,"culture,nature,cuisine",4
+Chengdu,China,medium,mild,"culture,cuisine,nature",6
+Menorca,Spain,medium,mild,"beaches,nature,cuisine",4
+Stone Town,Tanzania,low,hot,"culture,beaches,cuisine",3
+Johannesburg,South Africa,medium,mild,"urban,culture,nightlife",6
+Busan,South Korea,medium,mild,"cuisine,culture,nature",4
+Koh Lanta,Thailand,low,hot,"beaches,adventure,nature",4
+Mumbai,India,medium,hot,"culture,cuisine,urban",6
+Istanbul,Turkey,medium,mild,"culture,cuisine,urban",8
+Seville,Spain,medium,mild,"culture,cuisine,nightlife",4
+Bangkok,Thailand,low,hot,"culture,nightlife,cuisine",10
+Belfast,United Kingdom,medium,cold,"culture,cuisine,urban",4
+Odessa,Ukraine,low,mild,"culture,beaches,nightlife",4
+Zanzibar Town,Tanzania,medium,hot,"beaches,culture,nature",4
+Antananarivo,Madagascar,low,mild,"nature,culture,adventure",6
+Krabi,Thailand,low,hot,"nature,beaches,adventure",4
+Lomé,Togo,low,hot,"culture,adventure,nature",3
+Port of Spain,Trinidad and Tobago,medium,hot,"cuisine,culture,beaches",4
+Muscat,Oman,medium,hot,"culture,nature,beaches",4
+Kyiv,Ukraine,low,cold,"culture,nightlife,cuisine",4
+Galle,Sri Lanka,low,hot,"culture,nature,beaches",3
+Gdansk,Poland,medium,cold,"culture,cuisine,urban",3
+Miami,United States,high,hot,"beaches,nightlife,cuisine",4
+Svalbard,Norway,high,cold,"adventure,nature,seclusion",10
+Lapland,Finland,high,cold,"nature,seclusion,adventure",8
+Tunis,Tunisia,low,mild,"culture,cuisine,adventure",3
+San Francisco,United States,high,mild,"culture,cuisine,urban",4
+Boston,United States,high,cold,"culture,urban,nightlife",4
+Rotorua,New Zealand,medium,mild,"nature,wellness,culture",3
+El Chaltén,Argentina,low,cold,"adventure,nature,seclusion",8
+Christiansted,U.S. Virgin Islands,medium,hot,"beaches,adventure,nature",3
+Houston,United States,medium,mild,"cuisine,urban,culture",4
+San Diego,United States,medium,mild,"beaches,culture,adventure",4
+Ladakh,India,low,cold,"adventure,nature,seclusion",10
+Chefchaouen,Morocco,low,mild,"culture,nature,cuisine",3
+Lviv,Ukraine,low,cold,"culture,cuisine,nature",4
+Nashville,United States,medium,mild,"nightlife,culture,cuisine",4
+Cleveland,United States,medium,mild,"culture,cuisine,nature",3
+Ronda,Spain,medium,mild,"culture,nature,cuisine",3
+London,United Kingdom,high,cold,"culture,nightlife,cuisine",8
+Rochester,United States,medium,cold,"culture,nature,nightlife",3
+Namibia,Namibia,medium,mild,"adventure,nature,seclusion",10
+Memphis,United States,medium,mild,"culture,nightlife,cuisine",4
+Ashgabat,Turkmenistan,high,mild,"seclusion,culture,cuisine",6
+Tulum,Mexico,medium,hot,"beaches,wellness,adventure",4
+Honolulu,United States,high,hot,"nature,beaches,culture",8
+Tashkent,Uzbekistan,low,mild,"culture,cuisine,adventure",4
+Yangshuo,China,low,mild,"nature,adventure,seclusion",4
+Kuala Lumpur,Malaysia,medium,hot,"cuisine,urban,culture",6
+Cornwall,United Kingdom,medium,cold,"nature,beaches,adventure",4
+Dhaka,Bangladesh,low,hot,"culture,cuisine,nightlife",6
+Seattle,United States,high,mild,"urban,culture,nature",6
+Bishkek,Kyrgyzstan,low,mild,"adventure,nature,seclusion",3
+Siem Reap,Cambodia,low,hot,"culture,nature,cuisine",4
+Valdivia,Chile,medium,cold,"adventure,nature,cuisine",4
+Salta,Argentina,medium,mild,"nature,culture,adventure",4
+Split,Croatia,medium,mild,"culture,nature,beaches",4
+Galápagos Islands,Ecuador,high,mild,"adventure,nature,seclusion",10
+Florence,Italy,medium,mild,"culture,cuisine,urban",4
+Philadelphia,United States,medium,mild,"culture,nightlife,cuisine",4
+Bordeaux,France,medium,mild,"cuisine,culture,urban",4
+Strasbourg,France,medium,mild,"culture,cuisine,urban",4
+Palau,Palau,high,hot,"adventure,nature,beaches",10
+St. George's,Grenada,medium,hot,"beaches,nature,cuisine",4
+Debrecen,Hungary,low,cold,"culture,nature,nightlife",3
+Jaipur,India,low,hot,"culture,cuisine,adventure",4
+Crete,Greece,medium,mild,"nature,beaches,cuisine",8
+Baltimore,United States,medium,mild,"culture,nightlife,cuisine",4
+Madang,Papua New Guinea,low,hot,"nature,culture,adventure",6
+Taormina,Italy,medium,mild,"cuisine,culture,nature",4
+Takayama,Japan,medium,mild,"culture,nature,cuisine",3
+Phoenix,United States,medium,mild,"adventure,nature,wellness",4
+Blantyre,Malawi,low,mild,"nature,seclusion,culture",3
+Caracas,Venezuela,low,mild,"culture,nature,cuisine",4
+Da Lat,Vietnam,low,mild,"nature,adventure,cuisine",3
+New York City,United States,high,mild,"culture,nightlife,cuisine",8
+Sapa,Vietnam,low,mild,"nature,culture,adventure",4
+Guadalajara,Mexico,medium,mild,"culture,cuisine,nightlife",4
+Anchorage,United States,medium,cold,"nature,adventure,seclusion",6
+Bhutan,Bhutan,high,cold,"culture,nature,seclusion",10
+Samarkand,Uzbekistan,low,mild,"culture,cuisine,adventure",4
+Wellington,New Zealand,medium,mild,"culture,nature,nightlife",6
+Lahore,Pakistan,low,mild,"culture,cuisine,urban",4
+San Pedro de Atacama,Chile,medium,mild,"adventure,nature,seclusion",6
+Madeira,Portugal,medium,mild,"nature,adventure,cuisine",6
+Gjirokastër,Albania,low,mild,"culture,nature,seclusion",3
+Brisbane,Australia,medium,mild,"culture,adventure,nature",4
+Cesky Krumlov,Czech Republic,medium,cold,"culture,nature,seclusion",3
+Basseterre,Saint Kitts and Nevis,medium,hot,"nature,beaches,cuisine",3
+Honiara,Solomon Islands,medium,hot,"nature,seclusion,culture",6
+Siena,Italy,medium,mild,"culture,cuisine,seclusion",3
+La Palma,Spain,medium,mild,"nature,adventure,wellness",4
+Ghent,Belgium,medium,cold,"culture,nightlife,cuisine",3
+Sao Paulo,Brazil,medium,mild,"culture,nightlife,cuisine",6
+Monteverde,Costa Rica,medium,mild,"adventure,nature,seclusion",4
+Nukuʻalofa,Tonga,medium,mild,"nature,beaches,seclusion",4
+Birmingham,United Kingdom,medium,cold,"culture,cuisine,urban",4
+Tuscany,Italy,medium,mild,"culture,nature,cuisine",8
+Charlottetown,Canada,medium,cold,"culture,nature,seclusion",3
+St. Louis,United States,medium,mild,"culture,cuisine,urban",4
+Las Vegas,United States,high,mild,"nightlife,urban,cuisine",4
+Detroit,United States,medium,cold,"culture,urban,nightlife",4
+Suzhou,China,medium,mild,"culture,nature,cuisine",4
+Sardinia,Italy,medium,mild,"nature,beaches,adventure",8
+Port Vila,Vanuatu,medium,mild,"nature,adventure,beaches",4
+Sibiu,Romania,low,cold,"culture,nature,seclusion",3
+Luxor,Egypt,low,hot,"culture,cuisine,adventure",6
+Providenciales,Turks and Caicos,high,hot,"beaches,nature,cuisine",4
+Siwa Oasis,Egypt,low,mild,"nature,seclusion,culture",3
+Mombasa,Kenya,medium,hot,"beaches,culture,adventure",4
+Dushanbe,Tajikistan,low,mild,"adventure,nature,seclusion",3
+Cuzco,Peru,low,mild,"culture,nature,adventure",6
+Nara,Japan,medium,mild,"culture,nature,cuisine",3
+Buenos Aires,Argentina,medium,mild,"culture,nightlife,cuisine",10
+Córdoba,Argentina,medium,mild,"culture,nature,cuisine",4
+Sydney,Australia,high,mild,"beaches,urban,culture",8
+Hualien,Taiwan,medium,mild,"nature,adventure,cuisine",4
+Vienna,Austria,medium,mild,"culture,cuisine,urban",4
+Baku,Azerbaijan,medium,mild,"culture,nightlife,cuisine",6
+Minsk,Belarus,low,cold,"culture,nature,nightlife",3
+Santa Cruz,Bolivia,low,hot,"adventure,nature,culture",4
+Mostar,Bosnia and Herzegovina,low,mild,"culture,nature,cuisine",3
+Salvador da Bahia,Brazil,medium,hot,"culture,cuisine,nature",4
+Bujumbura,Burundi,low,mild,"nature,seclusion,culture",3
+Yaoundé,Cameroon,low,mild,"culture,cuisine,adventure",3
+Galway,Ireland,medium,cold,"culture,nature,nightlife",3
+Calgary,Canada,medium,cold,"nature,culture,adventure",4
+Halifax,Canada,medium,cold,"culture,nature,cuisine",3
+Sal,Cape Verde,medium,mild,"beaches,seclusion,adventure",4
+Bath,United Kingdom,medium,cold,"culture,wellness,cuisine",3
+Pristina,Kosovo,low,mild,"culture,nightlife,cuisine",3
+Belgrade,Serbia,low,mild,"nightlife,culture,cuisine",4
+Dallas,United States,medium,mild,"culture,nightlife,cuisine",4
+Guilin,China,low,mild,"nature,adventure,seclusion",4
+Hallstatt,Austria,medium,cold,"nature,culture,seclusion",2
+Nicosia,Cyprus,medium,mild,"culture,cuisine,urban",4
+San José,Costa Rica,medium,mild,"nature,adventure,cuisine",4
+Havana,Cuba,low,hot,"culture,nightlife,cuisine",4
+Roseau,Dominica,low,hot,"nature,adventure,wellness",4
+Carcassonne,France,medium,mild,"culture,cuisine,seclusion",3
+Lagos,Portugal,medium,mild,"beaches,adventure,nature",4
+Alexandria,Egypt,low,mild,"culture,cuisine,urban",4
+Tallinn,Estonia,medium,cold,"culture,cuisine,urban",4
+Paris,France,high,mild,"culture,nightlife,cuisine",4
+Puglia,Italy,medium,mild,"cuisine,culture,nature",4
+Queenstown,New Zealand,high,cold,"adventure,nature,nightlife",8
+Biarritz,France,medium,mild,"beaches,adventure,nature",4
+Libreville,Gabon,medium,hot,"nature,culture,adventure",3
+Sintra,Portugal,medium,mild,"culture,nature,cuisine",3
+Hvar,Croatia,medium,mild,"beaches,nightlife,nature",4
+Rostock,Germany,medium,cold,"culture,beaches,adventure",3
+Zakynthos,Greece,medium,mild,"beaches,nature,nightlife",4
+Reykjavík,Iceland,high,cold,"nature,adventure,wellness",4
+Jodhpur,India,low,hot,"culture,cuisine,adventure",3
+Bandung,Indonesia,low,mild,"culture,nature,cuisine",3
+Naples,Italy,medium,mild,"culture,cuisine,nightlife",4
+Yamoussoukro,Ivory Coast,low,hot,"culture,nature,cuisine",3
+Sapporo,Japan,medium,cold,"culture,nature,cuisine",6
+Almaty,Kazakhstan,medium,cold,"nature,culture,adventure",4
+Luxembourg City,Luxembourg,high,cold,"culture,cuisine,urban",3
+San Cristóbal de las Casas,Mexico,low,mild,"culture,nature,cuisine",3
+Riga,Latvia,medium,cold,"culture,nightlife,cuisine",4
+Portland,United States,medium,mild,"culture,nature,cuisine",4
+Ulaanbaatar,Mongolia,low,cold,"culture,adventure,nature",6
+Essaouira,Morocco,low,mild,"culture,nature,beaches",3
+Pokhara,Nepal,low,mild,"adventure,nature,wellness",4
+Eindhoven,Netherlands,medium,cold,"urban,culture,nature",3
+Port Moresby,Papua New Guinea,medium,hot,"adventure,nature,culture",6
+Cebu,Philippines,low,hot,"nature,beaches,adventure",6
+Lisbon,Portugal,medium,mild,"culture,cuisine,nightlife",4
+Brazzaville,Republic of the Congo,medium,hot,"nature,seclusion,culture",3
+Kigali,Rwanda,medium,mild,"culture,nature,seclusion",4
+Apia,Samoa,medium,hot,"culture,nature,beaches",4
+Gorée Island,Senegal,medium,hot,"culture,seclusion,nature",2
+Durban,South Africa,medium,mild,"beaches,adventure,nature",4
+Bled,Slovenia,medium,cold,"nature,adventure,seclusion",3
+Bilbao,Spain,medium,mild,"culture,nightlife,cuisine",4
+Asturias,Spain,medium,mild,"nature,culture,adventure",6
+Zermatt,Switzerland,high,cold,"adventure,nature,cuisine",6
+Chiang Mai,Thailand,low,hot,"culture,cuisine,adventure",4
+Kairouan,Tunisia,low,mild,"culture,cuisine,urban",3
+Kampala,Uganda,low,mild,"culture,nature,adventure",4
+Minneapolis,United States,medium,cold,"culture,nature,cuisine",4
+Denver,United States,medium,cold,"adventure,nature,culture",4
+Glasgow,United Kingdom,medium,cold,"culture,nightlife,cuisine",4
+Ushuaia,Argentina,medium,cold,"adventure,nature,seclusion",8
+Tucson,United States,medium,mild,"culture,adventure,nature",3
+Pittsburgh,United States,medium,cold,"culture,cuisine,urban",4
+Adelaide,Australia,medium,mild,"culture,nature,cuisine",4
+Manama,Bahrain,medium,hot,"culture,nightlife,cuisine",3
+La Paz,Bolivia,low,cold,"culture,adventure,nature",6
+Montevideo,Uruguay,medium,mild,"culture,cuisine,urban",4
+Mendoza,Argentina,medium,mild,"adventure,nature,cuisine",4
+Innsbruck,Austria,medium,cold,"adventure,nature,culture",4
+Washington DC,United States,medium,mild,"culture,urban,cuisine",4
+Brussels,Belgium,medium,cold,"culture,cuisine,urban",4
+Ottawa,Canada,medium,cold,"culture,nature,adventure",4
+Brno,Czech Republic,low,cold,"culture,cuisine,adventure",3
+Tartu,Estonia,low,cold,"culture,nature,nightlife",3
+Praia,Cape Verde,medium,hot,"beaches,seclusion,culture",4
+Harbin,China,medium,cold,"culture,urban,adventure",4
+Moroni,Comoros,low,hot,"nature,seclusion,culture",3
+Prague,Czech Republic,medium,cold,"culture,urban,nightlife",4
+Beijing,China,medium,mild,"culture,cuisine,urban",8
+Lhasa,China,high,cold,"culture,seclusion,adventure",10
+Aswan,Egypt,low,hot,"culture,nature,cuisine",4
+Rijeka,Croatia,medium,mild,"culture,nature,cuisine",4
+Cuenca,Ecuador,low,mild,"culture,nature,cuisine",4
+Giza,Egypt,medium,mild,"culture,cuisine,adventure",3
+Saaremaa Island,Estonia,low,cold,"nature,seclusion,beaches",3
+Venice,Italy,high,mild,"culture,cuisine,urban",4
+Rennes,France,medium,mild,"culture,cuisine,nature",3
+Papeete,French Polynesia,high,hot,"nature,beaches,adventure",8
+Lyon,France,medium,mild,"culture,cuisine,nightlife",4
+Bora Bora,French Polynesia,high,hot,"nature,beaches,wellness",10
+Carcassone,France,medium,mild,"culture,cuisine,nature",3
+Osaka,Japan,high,mild,"cuisine,urban,culture",6
+Banjul,Gambia,low,hot,"nature,beaches,culture",3
+Hamburg,Germany,medium,cold,"urban,culture,nightlife",4
+Vilnius,Lithuania,low,cold,"culture,nature,nightlife",3
+San Cristobal,Venezuela,low,hot,"nature,seclusion,culture",3
+Lübeck,Germany,medium,cold,"culture,cuisine,nature",3
+Antigua,Guatemala,low,mild,"culture,nature,cuisine",3
+Akureyri,Iceland,high,cold,"nature,adventure,seclusion",3
+Varanasi,India,low,hot,"culture,cuisine,nature",4
+Ajaccio,France,medium,mild,"culture,nature,beaches",4
+Tanna Island,Vanuatu,medium,hot,"nature,seclusion,culture",6
+Ho Chi Minh City,Vietnam,low,hot,"cuisine,urban,culture",4
+York,United Kingdom,medium,cold,"culture,cuisine,nature",3
+Delhi,India,low,hot,"culture,cuisine,urban",6
+Matera,Italy,medium,mild,"culture,cuisine,seclusion",3
+Hiroshima,Japan,medium,mild,"culture,cuisine,nature",4
+Vientiane,Laos,low,hot,"culture,cuisine,seclusion",3
+Edinburgh,United Kingdom,medium,cold,"culture,nightlife,cuisine",4
+Lusaka,Zambia,low,mild,"nature,culture,adventure",4
+Marrakesh,Morocco,low,mild,"culture,cuisine,nightlife",4
+Palawan,Philippines,low,hot,"nature,beaches,seclusion",8
+Ohrid,North Macedonia,low,mild,"nature,culture,seclusion",3
+Algarve,Portugal,medium,mild,"beaches,adventure,nature",4
+Bucharest,Romania,low,mild,"culture,nightlife,cuisine",4
+Seychelles,Seychelles,high,hot,"nature,beaches,seclusion",10
+Zurich,Switzerland,high,cold,"urban,culture,nature",4
+Dubai,United Arab Emirates,high,hot,"nightlife,wellness,urban",6
+Zanzibar,Tanzania,medium,hot,"nature,beaches,culture",8
+Atlanta,United States,medium,mild,"culture,nightlife,cuisine",4
+Thimphu,Bhutan,high,mild,"culture,seclusion,nature",10
+Los Angeles,United States,high,mild,"nightlife,urban,culture",8
+Savannah,United States,medium,mild,"culture,cuisine,adventure",3
+Bukhara,Uzbekistan,low,mild,"culture,seclusion,nature",4
+Montreal,Canada,medium,cold,"culture,cuisine,urban",4
+Hanoi,Vietnam,low,mild,"culture,cuisine,urban",4
+Perth,Australia,medium,mild,"adventure,nature,beaches",6
+Cardiff,United Kingdom,medium,cold,"culture,nightlife,urban",4
+San Jose,United States,high,mild,"nature,urban,culture",4
+Orlando,United States,medium,mild,"adventure,nightlife,urban",6
+Sighisoara,Romania,low,cold,"culture,seclusion,adventure",3
+Vancouver,Canada,high,cold,"nature,urban,culture",8
+Keswick,United Kingdom,medium,cold,"nature,adventure,seclusion",3
+Bologna,Italy,medium,mild,"culture,cuisine,urban",4
+Isle of Skye,United Kingdom,medium,cold,"nature,seclusion,adventure",6
+Guimarães,Portugal,medium,mild,"culture,cuisine,adventure",3
+Macau,China,medium,mild,"nightlife,urban,culture",4
+Salento,Colombia,low,mild,"nature,culture,adventure",3
+Zagreb,Croatia,medium,mild,"culture,cuisine,urban",4
+Quito,Ecuador,low,mild,"culture,adventure,nature",6
+San Salvador,El Salvador,low,mild,"cuisine,culture,adventure",4
+Suva,Fiji,medium,hot,"nature,culture,adventure",6
+Toulouse,France,medium,mild,"culture,nightlife,cuisine",4
+Frankfurt,Germany,medium,mild,"urban,culture,nightlife",4
+Accra,Ghana,low,hot,"culture,cuisine,adventure",4
+Cayenne,French Guiana,medium,hot,"nature,adventure,seclusion",3
+Launceston,Australia,medium,mild,"nature,adventure,seclusion",3
+Valparaíso,Chile,medium,mild,"culture,nightlife,cuisine",3
+Colmar,France,medium,mild,"culture,cuisine,seclusion",3
+Bratislava,Slovakia,medium,mild,"culture,adventure,nature",3
+Hong Kong,Hong Kong,high,mild,"culture,nightlife,cuisine",6
+Trinidad,Cuba,low,hot,"culture,nature,cuisine",3
+Plovdiv,Bulgaria,low,mild,"culture,cuisine,adventure",3
+Maui,United States,high,mild,"nature,beaches,adventure",8
+Khiva,Uzbekistan,low,mild,"culture,seclusion,nature",3
+Belize City,Belize,medium,hot,"adventure,nature,cuisine",3
+Harare,Zimbabwe,low,mild,"nature,culture,adventure",6
+Ubud,Indonesia,low,hot,"nature,wellness,culture",4
+Punta del Este,Uruguay,medium,mild,"beaches,nightlife,cuisine",4
+Rapa Nui,Chile,high,mild,"culture,seclusion,nature",10
+Cork,Ireland,medium,cold,"culture,nature,cuisine",3
+Batumi,Georgia,low,mild,"nature,beaches,cuisine",4
+Vladivostok,Russia,medium,cold,"culture,nature,adventure",6
+Murmansk,Russia,medium,cold,"nature,seclusion,culture",6
+Moscow,Russia,medium,cold,"culture,urban,nightlife",6
+St Petersburg,Russia,medium,cold,"culture,urban,nightlife",4
+Caye Caulker,Belize,low,hot,"adventure,nature,beaches",3
+Fort Lauderdale,United States,medium,hot,"beaches,nightlife,cuisine",4
+Abu Dhabi,United Arab Emirates,high,hot,"urban,culture,beaches",6
+Casablanca,Morocco,low,mild,"culture,nightlife,cuisine",4
+Meknes,Morocco,low,mild,"culture,cuisine,nature",3
+Gold Coast,Australia,medium,mild,"beaches,adventure,nature",4
+Rarotonga,Cook Islands,medium,mild,"nature,beaches,seclusion",6
+Funafuti,Tuvalu,high,hot,"seclusion,beaches,nature",10
+Playa del Carmen,Mexico,medium,hot,"beaches,adventure,nature",4
+Sharm El Sheikh,Egypt,medium,mild,"beaches,adventure,nature",4
+Ayers Rock,Australia,high,mild,"nature,seclusion,culture",6
+Moorea,French Polynesia,high,hot,"nature,beaches,wellness",6
+Salzburg,Austria,medium,cold,"culture,nature,cuisine",4
+Turin,Italy,medium,mild,"culture,cuisine,urban",4
+Lugano,Switzerland,high,mild,"nature,cuisine,wellness",4
+Goa,India,medium,hot,"beaches,nightlife,culture",4
+Islamabad,Pakistan,medium,mild,"nature,culture,cuisine",4
+Fortaleza,Brazil,medium,hot,"beaches,adventure,nightlife",4
+Antofagasta,Chile,medium,mild,"nature,culture,adventure",3
+Bariloche,Argentina,medium,cold,"adventure,nature,cuisine",8
+Quebec City,Canada,medium,cold,"culture,nature,cuisine",4
+Zion National Park,United States,medium,mild,"adventure,nature,seclusion",6
+Espiritu Santo,Vanuatu,medium,hot,"nature,beaches,adventure",6
+Kota Kinabalu,Malaysia,medium,hot,"nature,adventure,beaches",4
+Lake Tahoe,United States,high,cold,"adventure,nature,wellness",4
+Antalya,Turkey,medium,mild,"beaches,culture,adventure",6
+Cappadocia,Turkey,medium,mild,"nature,culture,adventure",6
+Sidi Bou Said,Tunisia,low,mild,"culture,beaches,cuisine",2
+Tehran,Iran,low,mild,"culture,cuisine,urban",6
+Byron Bay,Australia,medium,mild,"nature,beaches,wellness",4
+Port Douglas,Australia,high,hot,"nature,beaches,adventure",4
+Tahiti,French Polynesia,high,hot,"nature,beaches,wellness",10
+Santa Cruz de la Sierra,Bolivia,low,hot,"nature,culture,adventure",4
+Montego Bay,Jamaica,medium,hot,"beaches,adventure,nature",4
+Acapulco,Mexico,medium,hot,"adventure,beaches,nightlife",4
+Manuel Antonio National Park,Costa Rica,medium,mild,"nature,beaches,adventure",3
+Kuwait City,Kuwait,high,hot,"cuisine,urban,culture",4
+Uluru,Australia,high,mild,"nature,seclusion,culture",6
+Lautoka,Fiji,medium,hot,"adventure,nature,beaches",3
+Nadi,Fiji,medium,hot,"nature,beaches,adventure",4
+Lausanne,Switzerland,high,cold,"culture,nature,cuisine",4
+Vilamoura,Portugal,medium,mild,"beaches,nature,nightlife",3
+Cologne,Germany,medium,mild,"culture,nightlife,cuisine",4
+Pisa,Italy,medium,mild,"culture,cuisine,nature",3
+Kandy,Sri Lanka,low,hot,"culture,nature,cuisine",3
+Yangon,Myanmar,low,hot,"culture,cuisine,adventure",6
+Lima,Peru,medium,mild,"culture,cuisine,nightlife",6
+Iguazu Falls,Argentina,medium,mild,"adventure,nature,seclusion",3
+Santa Marta,Colombia,low,hot,"nature,culture,adventure",4
+Cali,Colombia,low,mild,"nightlife,culture,cuisine",4
+Cancun,Mexico,medium,hot,"beaches,nightlife,adventure",4
+San Antonio,United States,medium,mild,"culture,cuisine,urban",4
+Malaga,Spain,medium,mild,"culture,beaches,nightlife",4
+Medellín,Colombia,medium,mild,"culture,adventure,nightlife",4
+Linz,Austria,medium,cold,"culture,urban,nature",3
+Leipzig,Germany,medium,cold,"culture,nightlife,cuisine",4
+Hue,Vietnam,low,hot,"culture,cuisine,seclusion",4
+Braga,Portugal,medium,mild,"culture,cuisine,nature",3
+Ha Long,Vietnam,low,mild,"nature,adventure,cuisine",4
+Manaus,Brazil,medium,hot,"nature,culture,adventure",8
+San Andrés,Colombia,medium,hot,"beaches,adventure,nature",4
+Búzios,Brazil,medium,mild,"beaches,adventure,nature",4
+Florianópolis,Brazil,medium,mild,"nature,beaches,adventure",4
+San Carlos de Bariloche,Argentina,medium,cold,"adventure,nature,cuisine",6
+Niagara Falls,Canada,medium,cold,"nature,adventure,culture",3
+Darwin,Australia,medium,hot,"adventure,nature,culture",4
+Great Barrier Reef,Australia,high,hot,"adventure,nature,beaches",10
+Amritsar,India,low,mild,"culture,cuisine,nature",4
+Machu Picchu,Peru,high,mild,"culture,adventure,nature",10
+Antwerp,Belgium,medium,cold,"culture,nightlife,cuisine",4
+Nuremberg,Germany,medium,cold,"culture,cuisine,urban",3
+Funchal,Portugal,medium,mild,"nature,culture,cuisine",4
+Nuwara Eliya,Sri Lanka,low,mild,"nature,wellness,seclusion",3
+Naypyidaw,Myanmar,low,hot,"seclusion,nature",3
+Rosario,Argentina,medium,mild,"culture,nightlife,cuisine",4
+Nazca,Peru,low,mild,"culture,seclusion,adventure",2
+Los Cabos,Mexico,medium,mild,"beaches,adventure,nature",4
+Charleston,United States,medium,mild,"cuisine,culture,adventure",4
+Cozumel,Mexico,medium,hot,"beaches,adventure,nature",4
+Lille,France,medium,cold,"culture,cuisine,urban",3
+Arica,Chile,low,mild,"adventure,nature,beaches",3
+Plitvice Lakes,Croatia,medium,mild,"nature,adventure,seclusion",3
+Taupo,New Zealand,medium,mild,"adventure,nature,wellness",4
+Yellowstone National Park,United States,medium,cold,"adventure,nature,seclusion",8
+Key West,United States,high,hot,"beaches,adventure,nature",3
+Dunedin,New Zealand,medium,cold,"culture,nature,seclusion",3
+Kangaroo Island,Australia,medium,mild,"nature,seclusion,adventure",6
+Bay of Islands,New Zealand,medium,mild,"nature,adventure,beaches",8
+Aarhus,Denmark,medium,cold,"culture,cuisine,urban",3
+Vancouver Island,Canada,medium,cold,"nature,adventure,beaches",8
+Savusavu,Fiji,medium,hot,"nature,beaches,seclusion",6
+Bristol,United Kingdom,medium,cold,"culture,nightlife,cuisine",4
+Rovaniemi,Finland,medium,cold,"nature,adventure,seclusion",4
+Viña del Mar,Chile,medium,mild,"nature,beaches,nightlife",3
+Nelson,New Zealand,medium,mild,"nature,adventure,seclusion",6
+Maun,Botswana,medium,mild,"adventure,nature,seclusion",6
+Gothenburg,Sweden,medium,cold,"culture,nature,cuisine",4
+Manchester,United Kingdom,medium,cold,"culture,nightlife,cuisine",4
+Copenhagen,Denmark,medium,cold,"culture,urban,nightlife",4
+Sucre,Bolivia,low,mild,"culture,seclusion,adventure",4
