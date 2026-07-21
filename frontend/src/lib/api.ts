@@ -29,6 +29,18 @@ export type AlbumPhoto = {
   updated_at: string;
 };
 
+export type AlbumPhotoUploadBatch = {
+  results: Array<{
+    filename: string;
+    ok: boolean;
+    error: string | null;
+    photo: AlbumPhoto | null;
+  }>;
+  photos: AlbumPhoto[];
+  succeeded: number;
+  failed: number;
+};
+
 export type TripAlbum = {
   id: string;
   user_id: string;
@@ -147,15 +159,60 @@ export function setTokens(tokens: Tokens | null) {
   else window.localStorage.removeItem(TOKEN_KEY);
 }
 
-async function parseError(response: Response): Promise<string> {
+async function parseError(response: Response): Promise<ApiError> {
+  let detail = `Request failed (${response.status})`;
+  let retryAfter: number | undefined;
+  let code: string | undefined;
   try {
     const body = await response.json();
-    if (typeof body.detail === "string") return body.detail;
-    if (Array.isArray(body.detail)) return body.detail.map((item: { msg?: string }) => item.msg).filter(Boolean).join(", ");
+    if (typeof body.detail === "string") detail = body.detail;
+    else if (Array.isArray(body.detail)) {
+      detail = body.detail.map((item: { msg?: string }) => item.msg).filter(Boolean).join(", ");
+    }
+    if (typeof body.retry_after === "number") retryAfter = body.retry_after;
+    if (typeof body.code === "string") code = body.code;
   } catch {
     // Use the HTTP status below when the server did not return JSON.
   }
-  return `Request failed (${response.status})`;
+  const headerRetry = response.headers.get("Retry-After");
+  if (retryAfter == null && headerRetry) {
+    const parsed = Number(headerRetry);
+    if (!Number.isNaN(parsed)) retryAfter = parsed;
+  }
+  return new ApiError(detail, response.status, { retryAfter, code });
+}
+
+export class ApiError extends Error {
+  status: number;
+  retryAfter?: number;
+  code?: string;
+
+  constructor(message: string, status: number, opts?: { retryAfter?: number; code?: string }) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+    this.retryAfter = opts?.retryAfter;
+    this.code = opts?.code;
+  }
+}
+
+/** Friendly copy for AI / rate-limit failures — never show a raw stack or blank state. */
+export function friendlyApiMessage(error: unknown, fallback: string): string {
+  if (error instanceof ApiError) {
+    if (error.status === 429) {
+      const wait = error.retryAfter ? ` Try again in about ${error.retryAfter} seconds.` : "";
+      return `You're doing that a bit too often.${wait}`;
+    }
+    if (error.status === 503) {
+      return error.message || "This feature is temporarily unavailable. Please try again shortly.";
+    }
+    if (error.status === 502 || error.status >= 500) {
+      return error.message || fallback;
+    }
+    return error.message || fallback;
+  }
+  if (error instanceof Error && error.message) return error.message;
+  return fallback;
 }
 
 async function refreshAccessToken(): Promise<Tokens | null> {
@@ -192,7 +249,7 @@ export async function apiRequest<T>(
     const refreshed = await refreshAccessToken();
     if (refreshed) return apiRequest<T>(path, init, false);
   }
-  if (!response.ok) throw new Error(await parseError(response));
+  if (!response.ok) throw await parseError(response);
   if (response.status === 204) return undefined as T;
   return response.json() as Promise<T>;
 }
@@ -260,7 +317,12 @@ export const api = {
   uploadAlbumPhotos: (albumId: string, files: File[]) => {
     const body = new FormData();
     files.forEach((file) => body.append("files", file));
-    return apiRequest<AlbumPhoto[]>(`/albums/${albumId}/photos`, { method: "POST", body });
+    return apiRequest<AlbumPhotoUploadBatch>(`/albums/${albumId}/photos`, { method: "POST", body });
+  },
+  uploadAlbumPhoto: (albumId: string, file: File) => {
+    const body = new FormData();
+    body.append("files", file);
+    return apiRequest<AlbumPhotoUploadBatch>(`/albums/${albumId}/photos`, { method: "POST", body });
   },
   deleteAlbum: (albumId: string) =>
     apiRequest<void>(`/albums/${albumId}`, { method: "DELETE" }),
@@ -271,7 +333,7 @@ export const api = {
         ? { Authorization: `Bearer ${tokens.access_token}` }
         : undefined,
     });
-    if (!response.ok) throw new Error(await parseError(response));
+    if (!response.ok) throw await parseError(response);
     return response.blob();
   },
 };

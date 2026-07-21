@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Check, ChevronLeft, ChevronRight, Sun, Cloud, Snowflake, Shuffle } from "lucide-react";
-import { api, type RecommendationRequest } from "../lib/api";
+import { api, friendlyApiMessage, type RecommendationRequest } from "../lib/api";
 import { useAuth } from "../lib/auth";
 
 export const Route = createFileRoute("/plan")({
@@ -69,7 +69,12 @@ function PlanPage() {
       window.sessionStorage.setItem("storymiles.recommendations", JSON.stringify(response));
       await nav({ to: "/recommendations" });
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Could not generate recommendations");
+      setError(
+        friendlyApiMessage(
+          cause,
+          "We couldn't load personalized matches right now. Please try again in a few minutes.",
+        ),
+      );
     } finally {
       setSubmitting(false);
     }
@@ -134,7 +139,12 @@ function PlanPage() {
           {submitting ? "Finding matches…" : isLast ? "Find my destinations" : "Continue"} <ChevronRight size={16} />
         </button>
       </div>
-      {error && <p className="mt-4 rounded-xl border border-poppy/30 bg-poppy/10 p-3.5 text-sm text-poppy">{error}</p>}
+      {error && (
+        <div className="mt-4 ticket-card !p-4">
+          <div className="label-mono">Couldn't load matches</div>
+          <p className="mt-2 text-sm text-charcoal/80">{error}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -12,8 +12,14 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import { api, mediaUrl, type AlbumCreate, type TripAlbum } from "../lib/api";
+import { api, friendlyApiMessage, mediaUrl, type AlbumCreate, type TripAlbum } from "../lib/api";
 import { useAuth } from "../lib/auth";
+import {
+  MAX_PHOTO_SIZE_MB,
+  MAX_PHOTOS_PER_ALBUM,
+  prepareImageForUpload,
+  validateImageFile,
+} from "../lib/imageUpload";
 
 export const Route = createFileRoute("/albums")({
   component: AlbumsPage,
@@ -39,6 +45,13 @@ function AlbumsPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{
+    index: number;
+    total: number;
+    percent: number;
+    label: string;
+  } | null>(null);
+  const [fileErrors, setFileErrors] = useState<string[]>([]);
   const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState("");
 
@@ -78,19 +91,69 @@ function AlbumsPage() {
 
   const uploadPhotos = async () => {
     if (!selected || files.length === 0) return;
+    const remaining = Math.max(0, MAX_PHOTOS_PER_ALBUM - selected.photos.length);
+    if (remaining === 0) {
+      setError(`Album full (max ${MAX_PHOTOS_PER_ALBUM} photos)`);
+      return;
+    }
+
+    const queue = files.slice(0, remaining);
     setUploading(true);
     setError("");
-    try {
-      const photos = await api.uploadAlbumPhotos(selected.id, files);
-      setAlbums((current) =>
-        current.map((album) => album.id === selected.id ? { ...album, photos } : album)
-      );
-      setFiles([]);
-    } catch (cause) {
-      setError(messageFrom(cause));
-    } finally {
-      setUploading(false);
+    setFileErrors([]);
+    setUploadProgress({ index: 0, total: queue.length, percent: 0, label: "Starting…" });
+
+    const errors: string[] = [];
+    let latestPhotos = selected.photos;
+
+    for (let index = 0; index < queue.length; index++) {
+      const file = queue[index];
+      setUploadProgress({
+        index,
+        total: queue.length,
+        percent: Math.round((index / queue.length) * 100),
+        label: `Uploading ${file.name} (${index + 1}/${queue.length})`,
+      });
+
+      const clientError = validateImageFile(file);
+      if (clientError) {
+        errors.push(`${file.name}: ${clientError}`);
+        continue;
+      }
+
+      try {
+        const prepared = await prepareImageForUpload(file);
+        const batch = await api.uploadAlbumPhoto(selected.id, prepared.file);
+        URL.revokeObjectURL(prepared.previewUrl);
+        latestPhotos = batch.photos;
+        setAlbums((current) =>
+          current.map((album) => (album.id === selected.id ? { ...album, photos: batch.photos } : album)),
+        );
+        for (const result of batch.results) {
+          if (!result.ok && result.error) {
+            errors.push(`${result.filename}: ${result.error}`);
+          }
+        }
+      } catch (cause) {
+        errors.push(`${file.name}: ${friendlyApiMessage(cause, "Upload failed")}`);
+      }
     }
+
+    setFiles([]);
+    setFileErrors(errors);
+    setUploadProgress({
+      index: queue.length,
+      total: queue.length,
+      percent: 100,
+      label: errors.length ? "Finished with some errors" : "All photos uploaded",
+    });
+    if (errors.length && latestPhotos.length === selected.photos.length) {
+      setError(errors[0]);
+    } else if (queue.length < files.length) {
+      setError(`Album can hold ${MAX_PHOTOS_PER_ALBUM} photos — uploaded ${queue.length}, skipped the rest.`);
+    }
+    setUploading(false);
+    window.setTimeout(() => setUploadProgress(null), 1500);
   };
 
   const downloadPdf = async () => {
@@ -241,6 +304,9 @@ function AlbumsPage() {
                 files={files}
                 setFiles={setFiles}
                 uploading={uploading}
+                uploadProgress={uploadProgress}
+                fileErrors={fileErrors}
+                photoCount={selected.photos.length}
                 onUpload={uploadPhotos}
               />
 
@@ -294,42 +360,102 @@ function PhotoUploader({
   files,
   setFiles,
   uploading,
+  uploadProgress,
+  fileErrors,
+  photoCount,
   onUpload,
 }: {
   files: File[];
   setFiles: (files: File[]) => void;
   uploading: boolean;
+  uploadProgress: { index: number; total: number; percent: number; label: string } | null;
+  fileErrors: string[];
+  photoCount: number;
   onUpload: () => void;
 }) {
+  const remaining = Math.max(0, MAX_PHOTOS_PER_ALBUM - photoCount);
+
+  const pickFiles = (list: FileList | null) => {
+    const next = Array.from(list ?? []);
+    const accepted: File[] = [];
+    const rejected: string[] = [];
+    for (const file of next) {
+      const err = validateImageFile(file);
+      if (err) rejected.push(`${file.name}: ${err}`);
+      else accepted.push(file);
+    }
+    setFiles(accepted.slice(0, Math.max(remaining, 0)));
+  };
+
   return (
     <section className="mt-7 ticket-card">
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
           <div className="label-mono">Add memories</div>
           <h3 className="mt-1 font-display text-xl">Upload your trip photos</h3>
+          <p className="mt-1 text-xs text-charcoal/55">
+            {photoCount}/{MAX_PHOTOS_PER_ALBUM} photos · max {MAX_PHOTO_SIZE_MB}MB each · auto-compressed
+          </p>
         </div>
         {files.length > 0 && (
-          <button className="btn-primary !py-2.5" disabled={uploading} onClick={onUpload}>
-            <Upload size={15} /> {uploading ? "Uploading…" : `Upload ${files.length} photo${files.length === 1 ? "" : "s"}`}
+          <button className="btn-primary !py-2.5" disabled={uploading || remaining === 0} onClick={onUpload}>
+            <Upload size={15} />{" "}
+            {uploading
+              ? `Uploading… ${uploadProgress?.percent ?? 0}%`
+              : `Upload ${files.length} photo${files.length === 1 ? "" : "s"}`}
           </button>
         )}
       </div>
+
+      {uploadProgress && (
+        <div className="mt-4">
+          <div className="flex justify-between text-xs text-charcoal/60 mb-1.5">
+            <span>{uploadProgress.label}</span>
+            <span>{uploadProgress.percent}%</span>
+          </div>
+          <div className="h-2 rounded-full bg-ink/10 overflow-hidden">
+            <div
+              className="h-full bg-poppy transition-all duration-300"
+              style={{ width: `${uploadProgress.percent}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       <label className="mt-5 block cursor-pointer rounded-2xl border-2 border-dashed border-ink/15 bg-stamp/35 p-7 text-center hover:border-poppy/50 hover:bg-poppy/5 transition">
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp"
           multiple
           className="hidden"
-          onChange={(event) => setFiles(Array.from(event.target.files ?? []).slice(0, 30))}
+          disabled={uploading || remaining === 0}
+          onChange={(event) => {
+            pickFiles(event.target.files);
+            event.target.value = "";
+          }}
         />
         <div className="w-11 h-11 rounded-xl bg-ink text-horizon flex items-center justify-center mx-auto">
           <Images size={19} />
         </div>
         <div className="mt-3 font-medium text-ink">
-          {files.length ? `${files.length} photos ready` : "Choose multiple photos"}
+          {remaining === 0
+            ? `Album full (max ${MAX_PHOTOS_PER_ALBUM} photos)`
+            : files.length
+              ? `${files.length} photos ready`
+              : "Choose photos to upload"}
         </div>
-        <div className="mt-1 label-mono">JPG, PNG or WebP · up to 30 at once</div>
+        <div className="mt-1 label-mono">
+          JPG, PNG or WebP · up to {MAX_PHOTO_SIZE_MB}MB · {remaining} slot{remaining === 1 ? "" : "s"} left
+        </div>
       </label>
+
+      {fileErrors.length > 0 && (
+        <ul className="mt-4 space-y-1.5 text-sm text-poppy">
+          {fileErrors.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }

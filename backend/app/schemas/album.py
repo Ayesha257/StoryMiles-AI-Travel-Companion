@@ -67,3 +67,19 @@ class AlbumResponse(TimestampedSchema):
             trip_end=getattr(album, "trip_end"),
             photos=[AlbumPhotoResponse.from_photo(photo) for photo in getattr(album, "photos", [])],
         )
+
+
+class AlbumPhotoUploadItemResult(Schema):
+    filename: str
+    ok: bool
+    error: str | None = None
+    photo: AlbumPhotoResponse | None = None
+
+
+class AlbumPhotoUploadBatchResponse(Schema):
+    """Per-file outcomes so one bad photo does not fail the whole batch."""
+
+    results: list[AlbumPhotoUploadItemResult]
+    photos: list[AlbumPhotoResponse] = Field(default_factory=list)
+    succeeded: int = 0
+    failed: int = 0

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.dependencies import get_history_service, get_recommendation_engine
+from app.api.rate_limits import LimitRecommendations
 from app.auth.dependencies import CurrentUser
 from app.core.exceptions import NotFoundError
 from app.database.session import get_db
@@ -20,6 +21,7 @@ router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
 async def generate_recommendations(
     request: RecommendationRequest,
     current_user: CurrentUser,
+    _: LimitRecommendations,
     engine: Annotated[RecommendationEngine, Depends(get_recommendation_engine)],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> RecommendationResponse:

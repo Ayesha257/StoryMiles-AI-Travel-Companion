@@ -31,8 +31,25 @@ class VerificationError(AppError):
 
 
 class RateLimitError(AppError):
+    """Raised when a per-user/IP quota is exceeded. Includes retry_after for clients."""
+
     status_code = status.HTTP_429_TOO_MANY_REQUESTS
     detail = "Please wait before trying again"
+
+    def __init__(self, detail: str | None = None, *, retry_after: int = 60) -> None:
+        super().__init__(detail)
+        self.retry_after = max(int(retry_after), 1)
+
+
+class ServiceUnavailableError(AppError):
+    """Feature temporarily disabled (circuit breaker open / maintenance)."""
+
+    status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+    detail = "This feature is temporarily unavailable. Please try again shortly."
+
+    def __init__(self, detail: str | None = None, *, retry_after: int = 60) -> None:
+        super().__init__(detail)
+        self.retry_after = max(int(retry_after), 1)
 
 
 class EmailDeliveryError(AppError):

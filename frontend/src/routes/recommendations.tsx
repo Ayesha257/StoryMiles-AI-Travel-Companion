@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { api, type RecommendationRequest, type RecommendationResponse } from "../lib/api";
+import { api, friendlyApiMessage, type RecommendationRequest, type RecommendationResponse } from "../lib/api";
 import { useAuth } from "../lib/auth";
 
 export const Route = createFileRoute("/recommendations")({
@@ -73,7 +73,14 @@ function RecommendationsPage() {
         window.sessionStorage.setItem("storymiles.recommendations", JSON.stringify(response));
         setDestinations(toDestinations(response));
       })
-      .catch((cause) => setError(cause instanceof Error ? cause.message : "Could not load recommendations"))
+      .catch((cause) =>
+        setError(
+          friendlyApiMessage(
+            cause,
+            "We couldn't load personalized matches right now. Please try again shortly.",
+          ),
+        ),
+      )
       .finally(() => setLoading(false));
   }, [authLoading, user]);
 
@@ -130,9 +137,10 @@ function RecommendationsPage() {
         </div>
       ) : error ? (
         <div className="mt-12 ticket-card max-w-md">
-          <h2 className="font-display text-2xl">Recommendations could not be loaded</h2>
-          <p className="mt-2 text-sm text-poppy">{error}</p>
-          <Link to="/plan" className="btn-secondary mt-5">Try again</Link>
+          <div className="label-mono">Temporary delay</div>
+          <h2 className="font-display text-2xl mt-2">Matches are taking a break</h2>
+          <p className="mt-2 text-sm text-charcoal/75">{error}</p>
+          <Link to="/plan" className="btn-secondary mt-5">Try again from preferences</Link>
         </div>
       ) : loading ? (
         <SkeletonGrid />

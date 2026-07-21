@@ -76,3 +76,41 @@ def predict_destinations(
             )
         )
     return results
+
+
+def popular_destinations(
+    *,
+    artifacts: RecommendationArtifacts,
+    top_n: int,
+) -> list[PredictedDestination]:
+    """
+    Non-personalized fallback when the ML model is unreachable.
+
+    Uses destinations.csv ordered by ideal_duration proximity to a week-long
+    trip — a stable, offline ranking that still fills the UI instead of an
+    empty page. Scores are fixed so the UI can label them as popular.
+    """
+    if top_n < 1:
+        raise ValueError("top_n must be at least 1")
+    frame = artifacts.destinations.copy()
+    frame["_sort"] = (frame["ideal_duration"].astype(int) - 7).abs()
+    frame = frame.sort_values("_sort").head(top_n)
+    results: list[PredictedDestination] = []
+    for _, destination in frame.iterrows():
+        tags = _tags(destination["tags"])
+        results.append(
+            PredictedDestination(
+                name=str(destination["name"]),
+                country=str(destination["country"]),
+                budget_tier=str(destination["budget_tier"]),
+                best_weather=str(destination["best_weather"]),
+                tags=tags,
+                ideal_duration=int(destination["ideal_duration"]),
+                predicted_score=0.55,
+                explanation=(
+                    f"Popular destination fallback: {destination['name']} "
+                    f"({destination['budget_tier']} budget, best weather {destination['best_weather']})."
+                ),
+            )
+        )
+    return results

@@ -17,11 +17,15 @@ def build_storage_key(filename: str) -> str:
 
 
 async def read_upload_limited(upload: UploadFile, max_size_bytes: int) -> bytes:
+    from app.core.config import settings
+
     chunks: list[bytes] = []
     total = 0
     while chunk := await upload.read(1024 * 1024):
         total += len(chunk)
         if total > max_size_bytes:
-            raise ValueError(f"File exceeds maximum allowed size of {max_size_bytes} bytes")
+            raise ValueError(f"Photo too large (max {settings.max_photo_size_mb}MB)")
         chunks.append(chunk)
+    if total == 0:
+        raise ValueError("Unsupported file type — empty file")
     return b"".join(chunks)

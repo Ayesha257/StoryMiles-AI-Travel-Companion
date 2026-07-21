@@ -39,3 +39,9 @@ class AlbumRepository(BaseRepository[TripAlbum]):
         self.session.add(photo)
         await self.session.flush()
         return photo
+
+    async def count_photos(self, album_id: UUID) -> int:
+        total = await self.session.scalar(
+            select(func.count()).select_from(AlbumPhoto).where(AlbumPhoto.album_id == album_id)
+        )
+        return int(total or 0)

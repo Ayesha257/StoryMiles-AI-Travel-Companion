@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.dependencies import get_itinerary_generator
+from app.api.rate_limits import LimitItinerary
 from app.auth.dependencies import CurrentUser
 from app.core.exceptions import NotFoundError
 from app.database.session import get_db
@@ -20,6 +21,7 @@ router = APIRouter(prefix="/itineraries", tags=["Itineraries"])
 async def generate_itinerary(
     request: ItineraryGenerateRequest,
     current_user: CurrentUser,
+    _: LimitItinerary,
     generator: Annotated[ItineraryGenerator, Depends(get_itinerary_generator)],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> ItineraryResponse:

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.dependencies import get_image_upload_service, get_landmark_recognition_service
+from app.api.rate_limits import LimitLandmarkScan
 from app.auth.dependencies import CurrentUser
 from app.database.session import get_db
 from app.models.enums import ImagePurpose
@@ -18,6 +19,7 @@ router = APIRouter(prefix="/landmarks", tags=["Landmarks"])
 @router.post("/recognize", response_model=LandmarkRecognitionResponse, status_code=status.HTTP_201_CREATED)
 async def recognize_landmark(
     current_user: CurrentUser,
+    _: LimitLandmarkScan,
     file: Annotated[UploadFile, File(...)],
     image_service: Annotated[ImageUploadService, Depends(get_image_upload_service)],
     recognition_service: Annotated[LandmarkRecognitionService, Depends(get_landmark_recognition_service)],

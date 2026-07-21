@@ -11,7 +11,14 @@ from app.auth.dependencies import CurrentUser
 from app.database.session import get_db
 from app.models.enums import ImagePurpose
 from app.repositories.album import AlbumRepository
-from app.schemas.album import AlbumCreate, AlbumPhotoResponse, AlbumResponse
+from app.core.config import settings
+from app.schemas.album import (
+    AlbumCreate,
+    AlbumPhotoResponse,
+    AlbumPhotoUploadBatchResponse,
+    AlbumPhotoUploadItemResult,
+    AlbumResponse,
+)
 from app.services.album_pdf import AlbumPDFService
 from app.services.image import ImageUploadService
 
@@ -52,34 +59,81 @@ async def get_album(
     return AlbumResponse.from_album(album)
 
 
-@router.post("/{album_id}/photos", response_model=list[AlbumPhotoResponse], status_code=status.HTTP_201_CREATED)
+@router.post("/{album_id}/photos", response_model=AlbumPhotoUploadBatchResponse, status_code=status.HTTP_201_CREATED)
 async def upload_album_photos(
     album_id: UUID,
     current_user: CurrentUser,
     files: Annotated[list[UploadFile], File(...)],
     service: Annotated[ImageUploadService, Depends(get_image_upload_service)],
     db: Annotated[AsyncSession, Depends(get_db)],
-) -> list[AlbumPhotoResponse]:
+) -> AlbumPhotoUploadBatchResponse:
     repository = AlbumRepository(db)
     album = await repository.get_for_user(album_id, current_user.id)
     if album is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Album not found")
     if not files:
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Choose at least one photo")
-    if len(files) > 30:
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Upload up to 30 photos at a time")
+    if len(files) > settings.max_upload_batch_size:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Upload up to {settings.max_upload_batch_size} photos at a time",
+        )
 
-    try:
-        for upload in files:
+    results: list[AlbumPhotoUploadItemResult] = []
+    photo_count = await repository.count_photos(album_id)
+
+    for upload in files:
+        filename = upload.filename or "photo"
+        if photo_count >= settings.max_photos_per_album:
+            results.append(
+                AlbumPhotoUploadItemResult(
+                    filename=filename,
+                    ok=False,
+                    error=f"Album full (max {settings.max_photos_per_album} photos)",
+                )
+            )
+            continue
+        try:
             image, _ = await service.upload(current_user.id, upload, ImagePurpose.ALBUM)
-            await repository.add_photo(album.id, image.id)
-        await db.commit()
-    except ValueError as exc:
-        await db.rollback()
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
+            photo = await repository.add_photo(album.id, image.id)
+            # Need image relationship for response shape
+            photo.image = image
+            results.append(
+                AlbumPhotoUploadItemResult(
+                    filename=filename,
+                    ok=True,
+                    photo=AlbumPhotoResponse.from_photo(photo),
+                )
+            )
+            photo_count += 1
+            await db.commit()
+        except ValueError as exc:
+            await db.rollback()
+            results.append(AlbumPhotoUploadItemResult(filename=filename, ok=False, error=str(exc)))
+        except Exception:
+            await db.rollback()
+            results.append(
+                AlbumPhotoUploadItemResult(
+                    filename=filename,
+                    ok=False,
+                    error="Could not upload this photo — try again",
+                )
+            )
 
     refreshed = await repository.get_for_user(album_id, current_user.id)
-    return [AlbumPhotoResponse.from_photo(photo) for photo in refreshed.photos]
+    succeeded = sum(1 for item in results if item.ok)
+    failed = len(results) - succeeded
+    if succeeded == 0 and failed > 0:
+        # All failed — still 422 so clients can show the first specific error.
+        first_error = next((item.error for item in results if item.error), "Upload failed")
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=first_error)
+
+    return AlbumPhotoUploadBatchResponse(
+        results=results,
+        photos=[AlbumPhotoResponse.from_photo(photo) for photo in refreshed.photos] if refreshed else [],
+        succeeded=succeeded,
+        failed=failed,
+    )
 
 
 @router.delete("/{album_id}", status_code=status.HTTP_204_NO_CONTENT)

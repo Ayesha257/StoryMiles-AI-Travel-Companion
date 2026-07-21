@@ -1,13 +1,17 @@
 import asyncio
+import logging
 from uuid import UUID
 
-from app.models.enums import RecommendationStatus
-from app.models.preferences import UserPreferences
+from app.core.logging import log_event
 from app.ml.feature_engineering import BUDGET_MAP
 from app.ml.model_loader import get_recommendation_artifacts
-from app.ml.prediction import predict_destinations
+from app.ml.prediction import popular_destinations, predict_destinations
+from app.models.enums import RecommendationStatus
+from app.models.preferences import UserPreferences
 from app.repositories.recommendation import RecommendationRepository
 from app.schemas.recommendation import RecommendationRequest, RecommendationResponse
+
+logger = logging.getLogger("storymiles.recommendations")
 
 
 class RecommendationEngine:
@@ -28,15 +32,54 @@ class RecommendationEngine:
             if preferences and preferences.travel_styles
             else [style.value for style in request.travel_styles or []]
         )
-        predictions = await asyncio.to_thread(
-            predict_destinations,
-            artifacts=get_recommendation_artifacts(),
-            user_budget=user_budget,
-            user_weather_preference=request.weather_preference,
-            user_interests=interests,
-            user_trip_duration=request.trip_days,
-            top_n=request.top_n,
-        )
+
+        used_fallback = False
+        artifacts = get_recommendation_artifacts()
+        try:
+            predictions = await asyncio.to_thread(
+                predict_destinations,
+                artifacts=artifacts,
+                user_budget=user_budget,
+                user_weather_preference=request.weather_preference,
+                user_interests=interests,
+                user_trip_duration=request.trip_days,
+                top_n=request.top_n,
+            )
+        except Exception as exc:
+            # Local sklearn model — not a paid API, but still can fail if inference
+            # blows up. Fall back to popular destinations so the page never goes blank.
+            used_fallback = True
+            log_event(
+                logger,
+                logging.ERROR,
+                "Recommendation model failed — using popular destinations fallback",
+                event="ml_fallback",
+                endpoint="POST /recommendations/generate",
+                user_id=str(user_id),
+                error_type=type(exc).__name__,
+                recovered=True,
+                exc_info=True,
+            )
+            try:
+                predictions = await asyncio.to_thread(
+                    popular_destinations,
+                    artifacts=artifacts,
+                    top_n=request.top_n,
+                )
+            except Exception as fallback_exc:
+                log_event(
+                    logger,
+                    logging.ERROR,
+                    "Popular destinations fallback also failed",
+                    event="ml_fallback_failed",
+                    endpoint="POST /recommendations/generate",
+                    user_id=str(user_id),
+                    error_type=type(fallback_exc).__name__,
+                    recovered=False,
+                    exc_info=True,
+                )
+                raise
+
         recommendations = [
             {
                 "name": prediction.name,
@@ -52,11 +95,16 @@ class RecommendationEngine:
             }
             for prediction in predictions
         ]
+        model_name = (
+            f"popular_fallback:{type(artifacts.model).__name__}"
+            if used_fallback
+            else type(artifacts.model).__name__
+        )
         history = await self.repository.create(
             user_id=user_id,
             prompt=request.prompt,
             recommendations=recommendations,
-            model=type(get_recommendation_artifacts().model).__name__,
+            model=model_name,
             status=RecommendationStatus.GENERATED,
         )
         return RecommendationResponse.model_validate(history)

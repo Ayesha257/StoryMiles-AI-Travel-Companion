@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Sunrise, Sun, Moon, RefreshCw, ChevronDown } from "lucide-react";
-import { api, type Itinerary } from "../lib/api";
+import { api, friendlyApiMessage, type Itinerary } from "../lib/api";
 import { useAuth } from "../lib/auth";
 
 export const Route = createFileRoute("/itinerary/$id")({
@@ -80,7 +80,14 @@ function ItineraryPage() {
         setDays(generatedDays);
         setExpanded(new Set(generatedDays.map((day) => day.dayNumber)));
       })
-      .catch((cause) => setError(cause instanceof Error ? cause.message : "Could not generate this itinerary"))
+      .catch((cause) =>
+        setError(
+          friendlyApiMessage(
+            cause,
+            "We couldn't generate your itinerary right now. Please try again in a few minutes.",
+          ),
+        ),
+      )
       .finally(() => {
         window.clearInterval(interval);
         setLoading(false);
@@ -119,9 +126,22 @@ function ItineraryPage() {
           </div>
         ) : error ? (
           <div className="ticket-card max-w-md mx-auto text-center">
-            <h2 className="font-display text-2xl">Itinerary generation failed</h2>
-            <p className="mt-3 text-sm text-poppy">{error}</p>
-            <Link to="/recommendations" className="btn-secondary mt-5">Back to recommendations</Link>
+            <div className="label-mono">Temporary delay</div>
+            <h2 className="font-display text-2xl mt-2">We couldn't generate your itinerary right now</h2>
+            <p className="mt-3 text-sm text-charcoal/75">{error}</p>
+            <p className="mt-2 text-xs text-charcoal/50">
+              Please try again in a few minutes — our trip planner may be catching up.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2 justify-center">
+              <button
+                type="button"
+                className="btn-primary"
+                onClick={() => window.location.reload()}
+              >
+                Try again
+              </button>
+              <Link to="/recommendations" className="btn-secondary">Back to recommendations</Link>
+            </div>
           </div>
         ) : days.length === 0 ? (
           <div className="ticket-card max-w-md mx-auto text-center">

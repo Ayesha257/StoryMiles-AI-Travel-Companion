@@ -39,7 +39,10 @@ class EmailVerificationService:
             remaining = settings.verification_resend_cooldown_seconds - int(
                 (now - user.verification_code_sent_at).total_seconds()
             )
-            raise RateLimitError(f"Please wait {max(remaining, 1)} seconds before requesting another code")
+            raise RateLimitError(
+                f"Please wait {max(remaining, 1)} seconds before requesting another code",
+                retry_after=max(remaining, 1),
+            )
 
         code = f"{secrets.randbelow(1_000_000):06d}"
         await self._deliver(user.email, code, purpose)
