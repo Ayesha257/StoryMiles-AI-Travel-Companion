@@ -19,6 +19,7 @@ from collections import defaultdict, deque
 from app.core.config import settings
 from app.core.exceptions import ServiceUnavailableError
 from app.core.logging import log_event
+from app.core.rate_limit import format_wait
 
 logger = logging.getLogger("storymiles.circuit")
 
@@ -63,7 +64,7 @@ class CircuitBreaker:
                     )
                     raise ServiceUnavailableError(
                         f"{provider.capitalize()} is temporarily unavailable while we recover. "
-                        f"Please try again in about {retry_after} seconds.",
+                        f"Please try again in about {format_wait(retry_after)}.",
                         retry_after=retry_after,
                     )
                 # Cooldown elapsed — allow a probe (half-open).

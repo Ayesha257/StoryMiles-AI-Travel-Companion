@@ -133,6 +133,27 @@ def check_rate_limit(
         extra={"scope": scope, "limit": limit, "window_seconds": window},
     )
     raise RateLimitError(
-        f"Too many requests for this feature. Please try again in about {retry_after} seconds.",
+        f"Too many requests for this feature. Please try again in about {format_wait(retry_after)}.",
         retry_after=retry_after,
     )
+
+
+def format_wait(seconds: int) -> str:
+    """Human-readable wait (avoid raw '3578 seconds' in API/UI copy)."""
+    s = max(1, int(seconds))
+    if s < 60:
+        return f"{s} second{'s' if s != 1 else ''}"
+    minutes = (s + 59) // 60
+    if minutes < 60:
+        return f"{minutes} minute{'s' if minutes != 1 else ''}"
+    hours, rem = divmod(minutes, 60)
+    if rem == 0:
+        return f"{hours} hour{'s' if hours != 1 else ''}"
+    return f"{hours} hour{'s' if hours != 1 else ''} {rem} minute{'s' if rem != 1 else ''}"
+
+
+def reset_in_memory_limits() -> None:
+    """Clear process-local counters (dev/testing). No-op for Redis backend."""
+    if isinstance(_backend, InMemorySlidingWindow):
+        _backend._hits.clear()
+        logger.info("Cleared in-memory rate limit windows")

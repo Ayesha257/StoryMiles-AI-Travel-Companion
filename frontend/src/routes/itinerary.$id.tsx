@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Sunrise, Sun, Moon, RefreshCw, ChevronDown } from "lucide-react";
-import { api, friendlyApiMessage, type Itinerary } from "../lib/api";
+import { ApiError, api, formatRetryAfter, friendlyApiMessage, type Itinerary } from "../lib/api";
 import { useAuth } from "../lib/auth";
 
 export const Route = createFileRoute("/itinerary/$id")({
@@ -47,6 +47,7 @@ function ItineraryPage() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [retryAfterSeconds, setRetryAfterSeconds] = useState<number | null>(null);
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
   const [days, setDays] = useState<Day[]>([]);
   const [expanded, setExpanded] = useState<Set<number>>(new Set([1]));
@@ -80,14 +81,15 @@ function ItineraryPage() {
         setDays(generatedDays);
         setExpanded(new Set(generatedDays.map((day) => day.dayNumber)));
       })
-      .catch((cause) =>
+      .catch((cause) => {
+        setRetryAfterSeconds(cause instanceof ApiError ? (cause.retryAfter ?? null) : null);
         setError(
           friendlyApiMessage(
             cause,
             "We couldn't generate your itinerary right now. Please try again in a few minutes.",
           ),
-        ),
-      )
+        );
+      })
       .finally(() => {
         window.clearInterval(interval);
         setLoading(false);
@@ -130,7 +132,9 @@ function ItineraryPage() {
             <h2 className="font-display text-2xl mt-2">We couldn't generate your itinerary right now</h2>
             <p className="mt-3 text-sm text-charcoal/75">{error}</p>
             <p className="mt-2 text-xs text-charcoal/50">
-              Please try again in a few minutes — our trip planner may be catching up.
+              {retryAfterSeconds
+                ? `Please wait about ${formatRetryAfter(retryAfterSeconds)} before trying again.`
+                : "Please try again in a few minutes — our trip planner may be catching up."}
             </p>
             <div className="mt-5 flex flex-wrap gap-2 justify-center">
               <button

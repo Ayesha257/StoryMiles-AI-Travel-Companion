@@ -196,11 +196,25 @@ export class ApiError extends Error {
   }
 }
 
+/** Turn retry_after seconds into copy humans can scan (not "3578 seconds"). */
+export function formatRetryAfter(seconds: number): string {
+  const s = Math.max(1, Math.ceil(seconds));
+  if (s < 60) return `${s} second${s === 1 ? "" : "s"}`;
+  const minutes = Math.ceil(s / 60);
+  if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"}`;
+  const hours = Math.floor(minutes / 60);
+  const rem = minutes % 60;
+  if (rem === 0) return `${hours} hour${hours === 1 ? "" : "s"}`;
+  return `${hours} hour${hours === 1 ? "" : "s"} ${rem} minute${rem === 1 ? "" : "s"}`;
+}
+
 /** Friendly copy for AI / rate-limit failures — never show a raw stack or blank state. */
 export function friendlyApiMessage(error: unknown, fallback: string): string {
   if (error instanceof ApiError) {
     if (error.status === 429) {
-      const wait = error.retryAfter ? ` Try again in about ${error.retryAfter} seconds.` : "";
+      const wait = error.retryAfter
+        ? ` Try again in about ${formatRetryAfter(error.retryAfter)}.`
+        : "";
       return `You're doing that a bit too often.${wait}`;
     }
     if (error.status === 503) {
